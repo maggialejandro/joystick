@@ -1,9 +1,7 @@
 define(["jquery", "backbone"], 
-    function( $, Backbone) {
+    function($, Backbone) {
 
         var AppRouter = Backbone.Router.extend( {
-
-            // The Router constructor
             initialize: function() {
                 /*
                 this.vehiclesView = new CategoryView({ 
@@ -13,12 +11,8 @@ define(["jquery", "backbone"],
 
                 // Tells Backbone to start watching for hashchange events
                 Backbone.history.start();
-
             },
-
-            // Backbone.js Routes
             routes: {
-                // When there is no hash bang on the url, the home method is called
                 "": "home"
             },
             home: function() {

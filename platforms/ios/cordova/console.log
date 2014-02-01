@@ -1,52 +1,5 @@
-2014-01-31 16:37:18.430 HelloWorld[3435:80b] Multi-tasking -> Device: YES, App: YES
-2014-01-31 16:37:18.495 HelloWorld[3435:80b] Unlimited access to network resources
-2014-01-31 16:37:18.526 HelloWorld[3435:80b] Fix applied for database locations?: YES
-2014-01-31 16:37:19.852 HelloWorld[3435:80b] Resetting plugins due to page load.
-2014-01-31 16:37:20.567 HelloWorld[3435:80b] Finished load of: file:///Users/Alejandro/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/004E29B8-9AB5-4EF9-B76E-DFA920F05B1B/HelloWorld.app/www/index.html
-Terminating in response to SpringBoard's termination.
-2014-01-31 16:48:50.022 HelloWorld[4064:80b] Multi-tasking -> Device: YES, App: YES
-2014-01-31 16:48:50.086 HelloWorld[4064:80b] Unlimited access to network resources
-2014-01-31 16:48:50.096 HelloWorld[4064:80b] Fix applied for database locations?: YES
-2014-01-31 16:48:51.111 HelloWorld[4064:80b] Resetting plugins due to page load.
-2014-01-31 16:48:51.357 HelloWorld[4064:80b] Finished load of: file:///Users/Alejandro/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/004E29B8-9AB5-4EF9-B76E-DFA920F05B1B/HelloWorld.app/www/index.html
-2014-01-31 17:29:41.896 HelloWorld[4819:80b] Multi-tasking -> Device: YES, App: YES
-2014-01-31 17:29:41.981 HelloWorld[4819:80b] Unlimited access to network resources
-2014-01-31 17:29:43.510 HelloWorld[4819:80b] Resetting plugins due to page load.
-2014-01-31 17:29:44.042 HelloWorld[4819:80b] Finished load of: file:///Users/Alejandro/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/004E29B8-9AB5-4EF9-B76E-DFA920F05B1B/HelloWorld.app/www/index.html
-2014-01-31 17:32:25.211 HelloWorld[5448:80b] Multi-tasking -> Device: YES, App: YES
-2014-01-31 17:32:25.351 HelloWorld[5448:80b] Unlimited access to network resources
-2014-01-31 17:32:25.366 HelloWorld[5448:80b] Fix applied for database locations?: YES
-2014-01-31 17:32:26.815 HelloWorld[5448:80b] Resetting plugins due to page load.
-2014-01-31 17:32:27.843 HelloWorld[5448:80b] Finished load of: file:///Users/Alejandro/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/004E29B8-9AB5-4EF9-B76E-DFA920F05B1B/HelloWorld.app/www/index.html
-Terminating in response to SpringBoard's termination.
-2014-01-31 18:17:05.488 HelloWorld[8299:80b] Multi-tasking -> Device: YES, App: YES
-2014-01-31 18:17:05.584 HelloWorld[8299:80b] Unlimited access to network resources
-2014-01-31 18:17:05.638 HelloWorld[8299:80b] Fix applied for database locations?: YES
-2014-01-31 18:17:07.217 HelloWorld[8299:80b] Resetting plugins due to page load.
-2014-01-31 18:17:07.892 HelloWorld[8299:80b] Finished load of: file:///Users/Alejandro/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/004E29B8-9AB5-4EF9-B76E-DFA920F05B1B/HelloWorld.app/www/index.html
-2014-01-31 18:19:50.216 HelloWorld[8969:80b] Multi-tasking -> Device: YES, App: YES
-2014-01-31 18:19:50.351 HelloWorld[8969:80b] Unlimited access to network resources
-2014-01-31 18:19:50.374 HelloWorld[8969:80b] Fix applied for database locations?: YES
-2014-01-31 18:19:51.761 HelloWorld[8969:80b] Resetting plugins due to page load.
-2014-01-31 18:19:53.209 HelloWorld[8969:80b] Finished load of: file:///Users/Alejandro/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/004E29B8-9AB5-4EF9-B76E-DFA920F05B1B/HelloWorld.app/www/index.html
-2014-01-31 18:20:28.629 HelloWorld[9243:80b] Multi-tasking -> Device: YES, App: YES
-2014-01-31 18:20:28.652 HelloWorld[9243:80b] Unlimited access to network resources
-2014-01-31 18:20:28.680 HelloWorld[9243:80b] Fix applied for database locations?: YES
-2014-01-31 18:20:29.164 HelloWorld[9243:80b] Resetting plugins due to page load.
-2014-01-31 18:20:29.356 HelloWorld[9243:80b] Finished load of: file:///Users/Alejandro/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/004E29B8-9AB5-4EF9-B76E-DFA920F05B1B/HelloWorld.app/www/index.html
-Terminating in response to SpringBoard's termination.
-2014-01-31 20:44:48.475 HelloWorld[10380:80b] Multi-tasking -> Device: YES, App: YES
-2014-01-31 20:44:48.539 HelloWorld[10380:80b] Unlimited access to network resources
-2014-01-31 20:44:48.595 HelloWorld[10380:80b] Fix applied for database locations?: YES
-2014-01-31 20:44:49.768 HelloWorld[10380:80b] Resetting plugins due to page load.
-2014-01-31 20:44:50.646 HelloWorld[10380:80b] Finished load of: file:///Users/Alejandro/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/004E29B8-9AB5-4EF9-B76E-DFA920F05B1B/HelloWorld.app/www/index.html
-2014-01-31 20:52:13.762 HelloWorld[11000:80b] Multi-tasking -> Device: YES, App: YES
-2014-01-31 20:52:13.818 HelloWorld[11000:80b] Unlimited access to network resources
-2014-01-31 20:52:13.839 HelloWorld[11000:80b] Fix applied for database locations?: YES
-2014-01-31 20:52:14.993 HelloWorld[11000:80b] Resetting plugins due to page load.
-2014-01-31 20:52:15.170 HelloWorld[11000:80b] Finished load of: file:///Users/Alejandro/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/004E29B8-9AB5-4EF9-B76E-DFA920F05B1B/HelloWorld.app/www/index.html
-2014-02-01 11:54:14.615 HelloWorld[1877:80b] Multi-tasking -> Device: YES, App: YES
-2014-02-01 11:54:14.671 HelloWorld[1877:80b] Unlimited access to network resources
-2014-02-01 11:54:14.679 HelloWorld[1877:80b] Fix applied for database locations?: YES
-2014-02-01 11:54:15.665 HelloWorld[1877:80b] Resetting plugins due to page load.
-2014-02-01 11:54:16.664 HelloWorld[1877:80b] Finished load of: file:///Users/Alejandro/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/004E29B8-9AB5-4EF9-B76E-DFA920F05B1B/HelloWorld.app/www/index.html
+2014-02-01 20:01:09.310 HelloWorld[10046:80b] Multi-tasking -> Device: YES, App: YES
+2014-02-01 20:01:09.442 HelloWorld[10046:80b] Unlimited access to network resources
+2014-02-01 20:01:09.698 HelloWorld[10046:80b] Fix applied for database locations?: YES
+2014-02-01 20:01:11.434 HelloWorld[10046:80b] Resetting plugins due to page load.
+2014-02-01 20:01:12.082 HelloWorld[10046:80b] Finished load of: file:///Users/Alejandro/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/004E29B8-9AB5-4EF9-B76E-DFA920F05B1B/HelloWorld.app/www/index.html

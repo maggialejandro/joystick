@@ -1,9 +1,9 @@
 /*!
-* jQuery Mobile 1.4.1pre
-* Git HEAD hash: eb8d2baa231b5f7f8f6df2b68a2f11fffb371a0d <> Date: Fri Jan 31 2014 22:42:18 UTC
+* jQuery Mobile 1.4.0
+* Git HEAD hash: f09aae0e035d6805e461a7be246d04a0dbc98f69 <> Date: Thu Dec 19 2013 17:34:22 UTC
 * http://jquerymobile.com
 *
-* Copyright 2010, 2014 jQuery Foundation, Inc. and other contributors
+* Copyright 2010, 2013 jQuery Foundation, Inc. and other contributors
 * Released under the MIT license.
 * http://jquery.org/license
 *
@@ -30,7 +30,7 @@
 	$.extend( $.mobile, {
 
 		// Version of the jQuery Mobile Framework
-		version: "1.4.1pre",
+		version: "1.4.0",
 
 		// Deprecated and no longer used in 1.4 remove in 1.5
 		// Define the url parameter used for referencing widget-generated sub-pages.
@@ -517,7 +517,6 @@ $.ui.plugin = {
 };
 
 })( jQuery );
-
 (function( $, window, undefined ) {
 
 	$.extend( $.mobile, {
@@ -793,7 +792,7 @@ $.ui.plugin = {
 
 
 /*!
- * jQuery UI Widget c0ab71056b936627e8a7821f03c044aec6280a40
+ * jQuery UI Widget c0ab71056b936627e8a7821f03c044aec6280a40N
  * http://jqueryui.com
  *
  * Copyright 2013 jQuery Foundation and other contributors
@@ -1483,17 +1482,8 @@ $.mobile.widget = $.Widget;
 })(jQuery, this);
 
 
-/*!
- * jQuery hashchange event - v1.3 - 7/21/2010
- * http://benalman.com/projects/jquery-hashchange-plugin/
- * 
- * Copyright (c) 2010 "Cowboy" Ben Alman
- * Dual licensed under the MIT and GPL licenses.
- * http://benalman.com/about/license/
- */
-
 // Script: jQuery hashchange event
-//
+// 
 // *Version: 1.3, Last updated: 7/21/2010*
 // 
 // Project Home - http://benalman.com/projects/jquery-hashchange-plugin/
@@ -1570,9 +1560,7 @@ $.mobile.widget = $.Widget;
 //         extra awesomeness that BBQ provides. This plugin will be included as
 //         part of jQuery BBQ, but also be available separately.
 
-(function($,window,undefined){
-  '$:nomunge'; // Used by YUI compressor.
-  
+(function( $, window, undefined ) {
   // Reused string.
   var str_hashchange = 'hashchange',
     
@@ -1738,14 +1726,14 @@ $.mobile.widget = $.Widget;
   // event for browsers that don't natively support it, including creating a
   // polling loop to watch for hash changes and in IE 6/7 creating a hidden
   // Iframe to enable back and forward.
-  fake_onhashchange = (function(){
+  fake_onhashchange = (function() {
     var self = {},
       timeout_id,
       
       // Remember the initial hash so it doesn't get triggered immediately.
       last_hash = get_fragment(),
       
-      fn_retval = function(val){ return val; },
+      fn_retval = function( val ) { return val; },
       history_set = fn_retval,
       history_get = fn_retval;
     
@@ -1782,7 +1770,7 @@ $.mobile.widget = $.Widget;
     // vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
     // vvvvvvvvvvvvvvvvvvv REMOVE IF NOT SUPPORTING IE6/7/8 vvvvvvvvvvvvvvvvvvv
     // vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-    window.attachEvent && !window.addEventListener && !supports_onhashchange && (function(){
+    window.attachEvent && !window.addEventListener && !supports_onhashchange && (function() {
       // Not only do IE6/7 need the "magical" Iframe treatment, but so does IE8
       // when running in "IE7 compatibility" mode.
       
@@ -1791,7 +1779,7 @@ $.mobile.widget = $.Widget;
       
       // When the event is bound and polling starts in IE 6/7, create a hidden
       // Iframe for history handling.
-      self.start = function(){
+      self.start = function() {
         if ( !iframe ) {
           iframe_src = $.fn[ str_hashchange ].src;
           iframe_src = iframe_src && iframe_src + get_fragment();
@@ -1802,7 +1790,7 @@ $.mobile.widget = $.Widget;
             
             // When Iframe has completely loaded, initialize the history and
             // start polling.
-            .one( 'load', function(){
+            .one( 'load', function() {
               iframe_src || history_set( get_fragment() );
               poll();
             })
@@ -1818,7 +1806,7 @@ $.mobile.widget = $.Widget;
           // prettify the back/next history menu entries. Since IE sometimes
           // errors with "Unspecified error" the very first time this is set
           // (yes, very useful) wrap this with a try/catch block.
-          doc.onpropertychange = function(){
+          doc.onpropertychange = function() {
             try {
               if ( event.propertyName === 'title' ) {
                 iframe.document.title = doc.title;
@@ -1855,7 +1843,7 @@ $.mobile.widget = $.Widget;
           iframe_doc.open();
           
           // Set document.domain for the Iframe document as well, if necessary.
-          domain && iframe_doc.write( '<script>document.domain="' + domain + '"</script>' );
+          domain && iframe_doc.write( '<script>document.domain="' + domain + '"<\/script>' );
           
           iframe_doc.close();
           
@@ -1878,6 +1866,8 @@ $.mobile.widget = $.Widget;
 
 	/*! matchMedia() polyfill - Test a CSS media type/query in JS. Authors & copyright (c) 2012: Scott Jehl, Paul Irish, Nicholas Zakas. Dual MIT/BSD license */
 	window.matchMedia = window.matchMedia || (function( doc, undefined ) {
+
+		
 
 		var bool,
 			docElem = doc.documentElement,
@@ -3693,14 +3683,10 @@ if ( eventCaptureSupported ) {
 		}
 	});
 
-	function triggerCustomEvent( obj, eventType, event, bubble ) {
+	function triggerCustomEvent( obj, eventType, event ) {
 		var originalType = event.type;
 		event.type = eventType;
-		if ( bubble ) {
-			$.event.trigger( event, undefined, obj );
-		} else {
-			$.event.dispatch.call( obj, event );
-		}
+		$.event.dispatch.call( obj, event );
 		event.type = originalType;
 	}
 
@@ -3837,47 +3823,25 @@ if ( eventCaptureSupported ) {
 				Math.abs( start.coords[ 1 ] - stop.coords[ 1 ] ) < $.event.special.swipe.verticalDistanceThreshold ) {
 				var direction = start.coords[0] > stop.coords[ 0 ] ? "swipeleft" : "swiperight";
 
-				triggerCustomEvent( thisObject, "swipe", $.Event( "swipe", { target: origTarget, swipestart: start, swipestop: stop }), true );
-				triggerCustomEvent( thisObject, direction,$.Event( direction, { target: origTarget, swipestart: start, swipestop: stop } ), true );
+				triggerCustomEvent( thisObject, "swipe", $.Event( "swipe", { target: origTarget, swipestart: start, swipestop: stop }) );
+				triggerCustomEvent( thisObject, direction,$.Event( direction, { target: origTarget, swipestart: start, swipestop: stop } ) );
 				return true;
 			}
 			return false;
 
 		},
 
-		// This serves as a flag to ensure that at most one swipe event event is
-		// in work at any given time
-		eventInProgress: false,
-
 		setup: function() {
-			var events,
-				thisObject = this,
-				$this = $( thisObject ),
-				context = {};
+			var thisObject = this,
+				$this = $( thisObject );
 
-			// Retrieve the events data for this element and add the swipe context
-			events = $.data( this, "mobile-events" );
-			if ( !events ) {
-				events = { length: 0 };
-				$.data( this, "mobile-events", events );
-			}
-			events.length++;
-			events.swipe = context;
-
-			context.start = function( event ) {
-
-				// Bail if we're already working on a swipe event
-				if ( $.event.special.swipe.eventInProgress ) {
-					return;
-				}
-				$.event.special.swipe.eventInProgress = true;
-
+			$this.bind( touchStartEvent, function( event ) {
 				var stop,
 					start = $.event.special.swipe.start( event ),
 					origTarget = event.target,
 					emitted = false;
 
-				context.move = function( event ) {
+				function moveHandler( event ) {
 					if ( !start ) {
 						return;
 					}
@@ -3885,57 +3849,23 @@ if ( eventCaptureSupported ) {
 					stop = $.event.special.swipe.stop( event );
 					if ( !emitted ) {
 						emitted = $.event.special.swipe.handleSwipe( start, stop, thisObject, origTarget );
-						if ( emitted ) {
-
-							// Reset the context to make way for the next swipe event
-							$.event.special.swipe.eventInProgress = false;
-						}
 					}
 					// prevent scrolling
 					if ( Math.abs( start.coords[ 0 ] - stop.coords[ 0 ] ) > $.event.special.swipe.scrollSupressionThreshold ) {
 						event.preventDefault();
 					}
-				};
+				}
 
-				context.stop = function() {
+				$this.bind( touchMoveEvent, moveHandler )
+					.one( touchStopEvent, function() {
 						emitted = true;
-
-						// Reset the context to make way for the next swipe event
-						$.event.special.swipe.eventInProgress = false;
-						$document.off( touchMoveEvent, context.move );
-						context.move = null;
-				};
-
-				$document.on( touchMoveEvent, context.move )
-					.one( touchStopEvent, context.stop );
-			};
-			$this.on( touchStartEvent, context.start );
+						$this.unbind( touchMoveEvent, moveHandler );
+				});
+			});
 		},
 
 		teardown: function() {
-			var events, context;
-
-			events = $.data( this, "mobile-events" );
-			if ( events ) {
-				context = events.swipe;
-				delete events.swipe;
-				events.length--;
-				if ( events.length === 0 ) {
-					$.removeData( this, "mobile-events" );
-				}
-			}
-
-			if ( context ) {
-				if ( context.start ) {
-					$( this ).off( touchStartEvent, context.start );
-				}
-				if ( context.move ) {
-					$document.off( touchMoveEvent, context.move );
-				}
-				if ( context.stop ) {
-					$document.off( touchStopEvent, context.stop );
-				}
-			}
+			$( this ).unbind( touchStartEvent ).unbind( touchMoveEvent ).unbind( touchStopEvent );
 		}
 	};
 	$.each({
@@ -4329,7 +4259,7 @@ $.widget( "mobile.page", {
 
 	_setOptions: function( o ) {
 		if ( o.theme !== undefined ) {
-			this.element.removeClass( "ui-page-theme-" + this.options.theme ).addClass( "ui-page-theme-" + o.theme );
+			this.element.removeClass( "ui-body-" + this.options.theme ).addClass( "ui-body-" + o.theme );
 		}
 
 		if ( o.contentTheme !== undefined ) {
@@ -6439,6 +6369,7 @@ $.widget( "mobile.page", $.mobile.page, {
 				.attr( "data-" + $.mobile.ns + "rel", "back" )
 				.text( text || this.options.closeBtnText || "" )
 				.prependTo( dst );
+			this._on( btn, { click: "close" } );
 		}
 
 		this._headerCloseButton = btn;
@@ -7611,7 +7542,7 @@ $.widget( "mobile.checkboxradio", $.extend( {
 		return $( "<div class='"  +
 			( this.options.wrapperClass ? this.options.wrapperClass : "" ) +
 			" ui-" + this.inputtype +
-			( this.options.disabled ? " ui-state-disabled" : "" ) + "' ></div>" );
+			( this.options.disabled ? " ui-state-disabled" : "" ) + "' >" );
 	},
 
 	_handleInputFocus: function() {
@@ -8732,9 +8663,7 @@ $.widget( "mobile.slider", $.extend( {
 	_setDisabled: function( value ) {
 		value = !!value;
 		this.element.prop( "disabled", value );
-		this.slider
-			.toggleClass( "ui-state-disabled", value )
-			.attr( "aria-disabled", value );
+		this.slider.toggleClass( "ui-state-disabled" ).attr( "aria-disabled", value );
 	}
 
 }, $.mobile.behaviors.formReset ) );
@@ -8795,7 +8724,6 @@ $.widget( "mobile.slider", $.mobile.slider, {
 			if ( value && !this._popup ) {
 				this._popup = getPopup()
 					.addClass( "ui-body-" + ( this.options.theme || "a" ) )
-					.hide()
 					.insertBefore( this.element );
 			}
 		}
@@ -9802,9 +9730,7 @@ $.widget( "mobile.selectmenu", $.extend( {
 			if ( text ) {
 				span.text( text );
 			} else {
-
-				// Set the contents to &nbsp; which we write as &#160; to be XHTML compliant - see gh-6699
-				span.html( "&#160;" );
+				span.html( "&nbsp;" );
 			}
 
 			// TODO possibly aggregate multiple select option classes
@@ -10971,10 +10897,10 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			"</div>"+
 			"<div data-" + $.mobile.ns + "role='content'></div>"+
 			"</div>" );
-		listbox = $( "<div id='" + popupId + "' class='ui-selectmenu'></div>" ).insertAfter( this.select ).popup({ theme: o.overlayTheme });
-		list = $( "<ul class='ui-selectmenu-list' id='" + menuId + "' role='listbox' aria-labelledby='" + this.buttonId + "'" + themeAttr + dividerThemeAttr + "></ul>" ).appendTo( listbox );
-		header = $( "<div class='ui-header ui-bar-" + ( o.theme ? o.theme : "inherit" ) + "'></div>" ).prependTo( listbox );
-		headerTitle = $( "<h1 class='ui-title'></h1>" ).appendTo( header );
+		listbox = $( "<div id='" + popupId + "' class='ui-selectmenu'>" ).insertAfter( this.select ).popup({ theme: o.overlayTheme });
+		list = $( "<ul class='ui-selectmenu-list' id='" + menuId + "' role='listbox' aria-labelledby='" + this.buttonId + "'" + themeAttr + dividerThemeAttr + ">" ).appendTo( listbox );
+		header = $( "<div class='ui-header ui-bar-" + ( o.theme ? o.theme : "inherit" ) + "'>" ).prependTo( listbox );
+		headerTitle = $( "<h1 class='ui-title'>" ).appendTo( header );
 
 		if ( this.isMultiple ) {
 			headerClose = $( "<a>", {
@@ -11371,6 +11297,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 // buttonMarkup is deprecated as of 1.4.0 and will be removed in 1.5.0.
 
 (function( $, undefined ) {
+
 
 // General policy: Do not access data-* attributes except during enhancement.
 // In all other cases we determine the state of the button exclusively from its
@@ -11877,10 +11804,7 @@ $.widget( "mobile.controlgroup", $.extend( {
 
 		// Deprecated in 1.4. As from 1.5 button classes have to be present in the markup.
 		_btnMarkup: function() {
-			this.element
-				.children( "a" )
-				.filter( ":not([data-" + $.mobile.ns + "role='none'])" )
-				.attr( "data-" + $.mobile.ns + "role", "button" );
+			this.element.children( "a" ).attr( "data-" + $.mobile.ns + "role", "button" );
 			this.element.trigger( "create" );
 		},
 		// Deprecated in 1.4. As from 1.5 ui-btn-left/right classes have to be present in the markup.
@@ -13131,6 +13055,7 @@ $.widget( "mobile.table", $.mobile.table, {
 		if ( this.options.enhanced ) {
 			this._menu = $( this.document[ 0 ].getElementById( this._id() + "-popup" ) ).children().first();
 			this._addToggles( this._menu, true );
+			this._bindToggles( this._menu );
 		} else {
 			this._menu = this._enhanceColToggle();
 			this.element.addClass( this.options.classes.columnToggleTable );
@@ -13153,8 +13078,13 @@ $.widget( "mobile.table", $.mobile.table, {
 		this._on( this.window, {
 			throttledresize: "_setToggleState"
 		});
-		this._on( this._menu, {
-			"change input": "_menuInputChange"
+	},
+
+	_bindToggles: function( menu ) {
+		var inputs = menu.find( "input" );
+
+		this._on( inputs, {
+			change: "_menuInputChange"
 		});
 	},
 
@@ -13197,6 +13127,7 @@ $.widget( "mobile.table", $.mobile.table, {
 		// set bindings here
 		if ( !keep ) {
 			menu.controlgroup( "refresh" );
+			this._bindToggles( menu );
 		}
 	},
 
@@ -13427,7 +13358,7 @@ $.widget( "mobile.filterable", {
 			}
 
 			this._timer = this._delay( function() {
-				this._trigger( "beforefilter", null, { input: search } );
+				this._trigger( "beforefilter", "beforefilter", { input: search } );
 
 				// Change val as lastval for next execution
 				search[ 0 ].setAttribute( "data-" + $.mobile.ns + "lastval", val );
@@ -13482,10 +13413,6 @@ $.widget( "mobile.filterable", {
 		}
 
 		this._refreshChildWidget();
-
-		this._trigger( "filter", null, {
-			items: filterItems
-		});
 	},
 
 	// The Default implementation of _refreshChildWidget attempts to call
@@ -13631,16 +13558,6 @@ $.widget( "mobile.filterable", $.mobile.filterable, {
 		this._setWidget( this.element.data( "mobile-" + evt.type.substring( 0, evt.type.length - 6 ) ) );
 	},
 
-	_trigger: function( type, event, data ) {
-		if ( this._widget && this._widget.widgetFullName === "mobile-listview" &&
-			type === "beforefilter" ) {
-
-			// Also trigger listviewbeforefilter if this widget is also a listview
-			this._widget._trigger( "beforefilter", event, data );
-		}
-		this._super( type, event, data );
-	},
-
 	_setWidget: function( widget ) {
 		if ( !this._widget && widget ) {
 			this._widget = widget;
@@ -13650,7 +13567,7 @@ $.widget( "mobile.filterable", $.mobile.filterable, {
 		if ( !!this._widget ) {
 			this._syncTextInputOptions( this._widget.options );
 			if ( this._widget.widgetName === "listview" ) {
-				this._widget.options.hideDividers = true;
+				this._widget.options.hidedividers = true;
 				this._widget.element.listview( "refresh" );
 			}
 		}
