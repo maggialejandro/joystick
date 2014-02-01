@@ -11,7 +11,6 @@ define(["jquery", "backbone", "underscore", 'text!templates/menu.html'],
 			},
 			render: function(){
 				this.$el.html(this.template());
-
 			}
 		});
 
