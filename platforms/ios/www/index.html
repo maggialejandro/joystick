@@ -6,11 +6,17 @@
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link rel="stylesheet" type="text/css" href="css/libs/bootstrap.css" />
-        <title>Hello World</title>
+        <title>Phonegap</title>
     </head>
     <body>
-        <div class="app">
-            <div id="menu"></div>
+        <div id="home" data-role="page" data-title="Homepage" data-url="home" class="ui-page ui-body-c ui-page-active">
+            <div data-role="header" class="ui-header ui-bar-a" role="banner">
+                <h1 class="ui-title" role="heading" aria-level="1">Home</h1>
+            </div><!-- /header -->
+      
+            <div data-role="content" class="ui-content" role="main">
+            </div><!-- /content -->
+
         </div>
         <!--
         <script type="text/javascript" src="phonegap.js"></script>
@@ -18,8 +24,8 @@
         <script type="text/javascript" src="phonegap.js"></script>
         <script type="text/javascript" src="main.min.js"></script>
         -->
-        <script type="text/javascript" src="js/libs/require.js" data-main="js/main"></script>
-        
+        <script type="text/javascript" src="js/libs/require.js" data-main="js/mobile"></script>
+
         <!--
 
         <script type="text/javascript">
