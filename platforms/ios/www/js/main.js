@@ -23,7 +23,6 @@ require.config({
 
 require(["jquery", 'views/menu', "bootstrap"], 
 	function($, MenuView){
-		console.log('ok');
 		new MenuView();
 		//app.initialize();
 	});

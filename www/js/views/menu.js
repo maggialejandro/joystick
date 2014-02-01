@@ -5,6 +5,7 @@ define(["jquery", "backbone", "underscore", 'text!templates/menu.html'],
 			el: $("#menu"),
 			initialize: function(){
 				console.log('menu');
+
 				this.template = _.template(menuTemplate);
 				this.render();
 			},
