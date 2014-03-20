@@ -1,7 +1,7 @@
 ({
 	baseUrl: 'js',
-	mainConfigFile: 'js/main.js',
-	name: 'main',
+	mainConfigFile: 'js/mobile.js',
+	name: 'mobile',
 	out: 'main.min.js',
 	preserveLicenseComments: false,
 	shim: {

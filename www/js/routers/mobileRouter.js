@@ -1,23 +1,20 @@
-define(["jquery", "backbone"], 
-    function($, Backbone) {
+define(["jquery", "backbone", "socketio", "views/app", "views/joystick"],
+    function($, Backbone, io, AppView, JoystickView) {
 
         var AppRouter = Backbone.Router.extend( {
             initialize: function() {
-                /*
-                this.vehiclesView = new CategoryView({ 
-                    el: "#vehicles", 
-                    collection: new CategoriesCollection( [] , { type: "vehicles" } ) 
-                });*/
-
-                // Tells Backbone to start watching for hashchange events
+                //window.socket = io.connect('http://localhost:9000');
+                //window.socket.emit('jugadorConectado', {});
+                //new AppView();
+                this.joystick = new JoystickView();
+                console.log(this.joystick);
                 Backbone.history.start();
             },
             routes: {
                 "": "home"
             },
             home: function() {
-                // Programatically changes to the categories page
-                $.mobile.changePage( "#home" , { reverse: false, changeHash: false } );
+
             }
 
         } );
