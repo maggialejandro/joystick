@@ -1,2 +1,6 @@
-platforms/*
+node_modules/
+platforms/
+merges/
+plugins/
+.cordova/
 www/main.min.js

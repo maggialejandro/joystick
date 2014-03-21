@@ -7,7 +7,6 @@ define(["jquery", "backbone", "socketio", "views/app", "views/joystick"],
                 //window.socket.emit('jugadorConectado', {});
                 //new AppView();
                 this.joystick = new JoystickView();
-                console.log(this.joystick);
                 Backbone.history.start();
             },
             routes: {

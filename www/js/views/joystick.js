@@ -78,6 +78,7 @@ define([
         this.context.lineWidth = 2;
       },
       draw: function(){
+        console.log(App.router.joystick.context);
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.ship.targetVel.copyFrom(this.leftVector);
@@ -172,7 +173,7 @@ define([
           var touch =e.changedTouches[i];
           //console.log(leftTouchID + " "
           if((that.model.get('leftTouchID')<0) && (touch.clientX<that.model.get('halfWidth'))){
-            that.model.get('leftTouchID') = touch.identifier;
+            that.model.set({leftTouchID: touch.identifier});
             that.leftTouchStartPos.reset(touch.clientX, touch.clientY);
             that.leftTouchPos.copyFrom(that.leftTouchStartPos);
             that.leftVector.reset(0,0);
@@ -224,10 +225,10 @@ define([
         console.log(e);
         //console.log(this); //<-- this no es la vista del joystick!
         App.router.joystick.model.set({
-          mouseX: e.offsetX,
-          mouseY: e.offsetY
+          mouseX: e.clientX,
+          mouseY: e.clientY
         })
-        console.log(App.router.joystick.model.attributes);
+        console.log(App.router.joystick.model.attributes.mouseY, App.router.joystick.model.attributes.mouseX);
       }
 
     });
