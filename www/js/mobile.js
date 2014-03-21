@@ -5,18 +5,18 @@ require.config({
       "exports": '_'
     },/*
     "ratchet": {
-            "exports": 'ratchet'
-        },*/
+        "exports": 'ratchet'
+    },*/
     "backbone" : {
       "deps" : ["underscore", "jquery"],
       "exports" : "Backbone" //attaches "Backbone" to the window object
     },/*
     "bootstrap" : {
       "deps" : ["jquery"]
-    },*/
+    },
     "jquery.mobile": {
       "deps" : ["jquery"]
-    }
+    }*/
   },
   paths :{
     "jquery" : "libs/jquery",
@@ -37,12 +37,11 @@ require.config({
 require(["jquery", "routers/mobileRouter", "underscore"],
   function($, MobileRouter, _, io){
     if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) {
-          document.addEventListener('deviceready', function() {
+          //document.addEventListener('deviceready', function() { //TODO: es necesario para phonegap?
               App.router = new MobileRouter();
-          }, false);
+          //}, false);
       } else {
           App.router = new MobileRouter();
       }
-
   });
 

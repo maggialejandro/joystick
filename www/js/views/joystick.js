@@ -14,7 +14,10 @@ define([
       initialize: function(){
 
         //Global
-        App.models.Vector2Const.temp = new Vector2(0, 0);
+        App.models.Vector2Const.temp = new Vector2({
+          x: 0,
+          y: 0
+        });
 
         this.model = new JoystickModel();
 
@@ -26,9 +29,9 @@ define([
         this.spareBullets = [];
 
         //Vectores: Joysticks?
-        this.leftTouchPos = new Vector2(0, 0),
-        this.leftTouchStartPos = new Vector2(0, 0),
-        this.leftVector = new Vector2(0, 0);
+        this.leftTouchPos = new Vector2({x: 0, y: 0});
+        this.leftTouchStartPos = new Vector2({x: 0, y: 0});
+        this.leftVector = new Vector2({x: 0, y: 0});
 
         this.template = _.template(joystickTemplate);
 
@@ -36,19 +39,20 @@ define([
 
       },
       render: function(){
-        this.$el.html(this.template());
+        this.$el.prepend(this.template());
         this.$('.container').html(this.canvas);
 
         this.resetCanvas();
 
-        this.ship = new ShipView(this.model.get('halfWidth'), this.model.get('halfHeight'));
+        this.ship = new ShipView({x: this.model.get('halfWidth'), y: this.model.get('halfHeight')});
 
-        document.body.appendChild(this.ship.canvas); //TODO: revisar
+        $('.container').after(this.ship.canvas); //TODO: revisar
 
         //TODO: seguir por aca
-        //setInterval(this.draw, 1000/35);
+        setInterval(this.draw, 1000/35);
         //this.draw();
 
+        //TODO: usar eventos de hammer.js
         if('createTouch' in document) {
           this.canvas.addEventListener( 'touchstart', this.onTouchStart, false );
           this.canvas.addEventListener( 'touchmove', this.onTouchMove, false );
@@ -62,6 +66,8 @@ define([
 
       },
       resetCanvas: function(event){
+        //BUG: al dar vuelta la pantalla this no es esta vista sino window
+
         // resize the canvas - but remember - this clears the canvas too.
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
@@ -78,34 +84,32 @@ define([
         this.context.lineWidth = 2;
       },
       draw: function(){
-        console.log(App.router.joystick.context);
-        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        var self = App.router.joystick;
+        self.context.clearRect(0, 0, self.canvas.width, self.canvas.height);
 
-        this.ship.targetVel.copyFrom(this.leftVector);
-        this.ship.targetVel.multiplyEq(0.2);
+        self.ship.targetVel.copyFrom(self.leftVector);
+        self.ship.targetVel.multiplyEq(0.2);
 
-        this.ship.update();
+        self.ship.update();
 
-        //¿¿¿¿ x, y ????????
-        with(this.ship.pos) {
-          var x = this.ship.pos.get('x');
-          var y = this.ship.pos.get('y');
-          //console.log(this.ship.pos);
-          //console.log(x);
-          //console.log(y); //TODO: la Y esta mal
+        //Creo que hace que cuando sale de pantalla aparezca por el otro lado
+        if(self.ship.pos.get('x') < 0)
+          self.ship.pos.set({x: self.canvas.width});
+        else if(self.ship.pos.get('x') > self.canvas.width)
+          self.ship.pos.set({x: 0});
 
-          if(x < 0) x = this.canvas.width;
-          else if(x > this.canvas.width) x = 0;
-          if(y < 0) y = this.canvas.height;
-          else if (y > this.canvas.height) y = 0;
-        }
+        if(self.ship.pos.get('y') < 0)
+          self.ship.pos.set({y: self.canvas.height});
+        else if (self.ship.pos.get('y') > self.canvas.height)
+          self.ship.pos.set({y: 0});
 
-        this.ship.draw();
 
-        var that = this;
+        self.ship.draw();
 
-        for (var i = 0; i < this.bullets.length; i++) {
-          var bullet = this.bullets[i];
+        var that = self;
+
+        for (var i = 0; i < self.bullets.length; i++) {
+          var bullet = self.bullets[i];
           if(!bullet.model.get('enabled')) continue;
           bullet.update();
           bullet.draw(that.context);
@@ -114,9 +118,9 @@ define([
         }
 
         if('createTouch' in document) {
-          for(var i=0; i<this.touches.length; i++) {
+          for(var i=0; i<self.touches.length; i++) {
 
-            var touch = this.touches[i];
+            var touch = self.touches[i];
 
             if(touch.identifier == that.model.get('leftTouchID')){
               that.context.beginPath();
@@ -146,8 +150,8 @@ define([
             }
           }
         } else {
-          this.context.fillStyle  = "white";
-          this.context.fillText("mouse : "+this.model.get('mouseX')+", "+this.model.get('mouseY'), this.model.get('mouseX'), this.model.get('mouseY'));
+          self.context.fillStyle  = "white";
+          self.context.fillText("mouse : "+self.model.get('mouseX')+", "+self.model.get('mouseY'), self.model.get('mouseX'), self.model.get('mouseY'));
         }
 
       },
@@ -156,10 +160,21 @@ define([
 
         if(this.spareBullets.length>0) {
           bullet = this.spareBullets.pop();
-          bullet.reset(this.ship.pos.get('x'), this.ship.pos.get('y'), this.ship.model.get('angle'));
+
+          bullet.reset({
+            x: this.ship.pos.get('x'),
+            y: this.ship.pos.get('y'),
+            angle: this.ship.model.get('angle')
+          });
+
         } else {
 
-          bullet = new BulletView(this.ship.pos.x, this.ship.pos.y, this.ship.angle);
+          bullet = new BulletView({
+            x: this.ship.pos.get('x'),
+            y: this.ship.pos.get('y'),
+            angle: this.ship.get('angle')
+          });
+
           this.bullets.push(bullet);
 
         }
@@ -167,68 +182,65 @@ define([
         bullet.vel.plusEq(this.ship.vel);
       },
       onTouchStart: function(e){
-        var that = this;
+        var that = App.router.joystick;
 
-        for(var i = 0; i<e.changedTouches.length; i++){
-          var touch =e.changedTouches[i];
-          //console.log(leftTouchID + " "
-          if((that.model.get('leftTouchID')<0) && (touch.clientX<that.model.get('halfWidth'))){
+        for(var i = 0; i < e.changedTouches.length; i++){
+          var touch = e.changedTouches[i];
+
+          if((that.model.get('leftTouchID') < 0) && (touch.clientX < that.model.get('halfWidth'))){
+            console.log(that);
             that.model.set({leftTouchID: touch.identifier});
-            that.leftTouchStartPos.reset(touch.clientX, touch.clientY);
+            that.leftTouchStartPos.reset({x: touch.clientX, y: touch.clientY});
             that.leftTouchPos.copyFrom(that.leftTouchStartPos);
-            that.leftVector.reset(0,0);
+            that.leftVector.reset({x: 0, y: 0});
             continue;
           } else {
+            //console.log('that');
+            console.log(that);
             that.makeBullet();
           }
         }
 
-        this.touches = e.touches;
-        console.log('touches');
-        console.log(this.touches);
+        that.touches = e.touches;
       },
       onTouchMove: function(e) {
         // Prevent the browser from doing its default thing (scroll, zoom)
         e.preventDefault();
-        var that = this;
+
+        var that = App.router.joystick;
 
         for(var i = 0; i<e.changedTouches.length; i++){
           var touch =e.changedTouches[i];
-          if(that.model.get('leftTouchID') == touch.identifier)
-          {
-            that.leftTouchPos.reset(touch.clientX, touch.clientY);
-            that.leftVector.copyFrom(that.leftTouchPos); //TODO
-            that.leftVector.minusEq(that.leftTouchStartPos);  //TODO
+          if(that.model.get('leftTouchID') == touch.identifier){
+            that.leftTouchPos.reset({x: touch.clientX, y: touch.clientY});
+            that.leftVector.copyFrom(that.leftTouchPos);
+            that.leftVector.minusEq(that.leftTouchStartPos);
             break;
           }
         }
 
-        this.touches = e.touches;
-        console.log('touches');
-        console.log(this.touches);
+        that.touches = e.touches;
       },
       onTouchEnd: function(e){
-        this.touches = e.touches;
-        var that = this;
+        var that = App.router.joystick;
+        that.touches = e.touches;
 
         for(var i = 0; i<e.changedTouches.length; i++){
           var touch =e.changedTouches[i];
           if(that.model.get('leftTouchID') == touch.identifier){
             that.model.set({leftTouchID: -1});
-            that.leftVector.reset(0,0);
+            that.leftVector.reset({x: 0, y: 0});
             break;
           }
         }
       },
       onMouseMove: function(e){
         //BUG: this.model undefined
-        console.log(e);
         //console.log(this); //<-- this no es la vista del joystick!
         App.router.joystick.model.set({
           mouseX: e.clientX,
           mouseY: e.clientY
         })
-        console.log(App.router.joystick.model.attributes.mouseY, App.router.joystick.model.attributes.mouseX);
       }
 
     });

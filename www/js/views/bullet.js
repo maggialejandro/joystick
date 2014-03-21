@@ -5,24 +5,23 @@ define([
   ], function(Backbone, Vector2, BulletModel) {
 
     var BulletView = Backbone.View.extend({
-      initialize: function(x, y, angle){
+      initialize: function(bulletOptions){
         this.model = new BulletModel();
-        this.reset(x, y, angle);
-
+        this.reset(bulletOptions);
       },
       update: function() {
         this.pos.plusEq(this.vel);
         this.model.set({life: this.model.get('life')--});
 
-        if(this.get('life') < 0) this.set({enabled: false});
+        if(this.get('life') < 0) this.model.set({enabled: false});
 
       },
-      reset: function(x, y, angle){
-        this.pos = new Vector2(x,y);
-        var unitv = new Vector2(1,0);
+      reset: function(bulletOptions){
+        this.pos = new Vector2({x: bulletOptions.x, y: bulletOptions.y});
+        var unitv = new Vector2({x: 1, y: 0});
 
         // instead set Vector with speed and rotate
-        unitv.rotate(angle);
+        unitv.rotate(bulletOptions.angle);
 
         this.vel = unitv.clone();
         this.vel.multiplyEq(this.model.get('speed'));
@@ -30,7 +29,7 @@ define([
         unitv.multiplyEq(10);
         this.pos.plusEq(unitv);
 
-        this.set({
+        this.model.set({
           enabled: true,
           life: 50
         });

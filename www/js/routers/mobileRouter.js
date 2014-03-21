@@ -1,5 +1,5 @@
-define(["jquery", "backbone", "socketio", "views/app", "views/joystick"],
-    function($, Backbone, io, AppView, JoystickView) {
+define(["jquery", "backbone", "socketio", "views/joystick"],
+    function($, Backbone, io, JoystickView) {
 
         var AppRouter = Backbone.Router.extend( {
             initialize: function() {
