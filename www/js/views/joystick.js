@@ -28,7 +28,6 @@ define([
         this.bullets = [];
         this.spareBullets = [];
 
-        //Vectores: Joysticks?
         this.leftTouchPos = new Vector2({x: 0, y: 0});
         this.leftTouchStartPos = new Vector2({x: 0, y: 0});
         this.leftVector = new Vector2({x: 0, y: 0});
@@ -46,11 +45,9 @@ define([
 
         this.ship = new ShipView({x: this.model.get('halfWidth'), y: this.model.get('halfHeight')});
 
-        $('.container').after(this.ship.canvas); //TODO: revisar
+        $('.container').after(this.ship.canvas);
 
-        //TODO: seguir por aca
-        setInterval(this.draw, 1000/35);
-        //this.draw();
+        setInterval(this.draw, 1000/200);
 
         //TODO: usar eventos de hammer.js
         if('createTouch' in document) {
@@ -84,76 +81,78 @@ define([
         this.context.lineWidth = 2;
       },
       draw: function(){
-        var self = App.router.joystick;
-        self.context.clearRect(0, 0, self.canvas.width, self.canvas.height);
+        var that = App.router.joystick;
+        that.context.clearRect(0, 0, that.canvas.width, that.canvas.height);
 
-        self.ship.targetVel.copyFrom(self.leftVector);
-        self.ship.targetVel.multiplyEq(0.2);
+        that.ship.targetVel.copyFrom(that.leftVector);
+        that.ship.targetVel.multiplyEq(0.2);
 
-        self.ship.update();
+        that.ship.update();
 
-        //Creo que hace que cuando sale de pantalla aparezca por el otro lado
-        if(self.ship.pos.get('x') < 0)
-          self.ship.pos.set({x: self.canvas.width});
-        else if(self.ship.pos.get('x') > self.canvas.width)
-          self.ship.pos.set({x: 0});
+        if(that.ship.pos.get('x') < 0)
+          that.ship.pos.set({x: that.canvas.width});
+        else if(that.ship.pos.get('x') > that.canvas.width)
+          that.ship.pos.set({x: 0});
 
-        if(self.ship.pos.get('y') < 0)
-          self.ship.pos.set({y: self.canvas.height});
-        else if (self.ship.pos.get('y') > self.canvas.height)
-          self.ship.pos.set({y: 0});
+        if(that.ship.pos.get('y') < 0)
+          that.ship.pos.set({y: that.canvas.height});
+        else if (that.ship.pos.get('y') > that.canvas.height)
+          that.ship.pos.set({y: 0});
 
+        that.ship.draw();
 
-        self.ship.draw();
+        that.drawBullets();
 
-        var that = self;
+        that.drawJoysticks();
 
-        for (var i = 0; i < self.bullets.length; i++) {
-          var bullet = self.bullets[i];
-          if(!bullet.model.get('enabled')) continue;
-          bullet.update();
-          bullet.draw(that.context);
-          if(!bullet.model.get('enabled'))
-            that.spareBullets.push(bullet);
-        }
-
+      },
+      drawJoysticks: function(){
         if('createTouch' in document) {
-          for(var i=0; i<self.touches.length; i++) {
+          for(var i=0; i<this.touches.length; i++) {
 
-            var touch = self.touches[i];
+            var touch = this.touches[i];
 
-            if(touch.identifier == that.model.get('leftTouchID')){
-              that.context.beginPath();
-              that.context.strokeStyle = "cyan";
-              that.context.lineWidth = 6;
-              that.context.arc(that.leftTouchStartPos.get('x'), that.leftTouchStartPos.get('y'), 40, 0, Math.PI*2, true);
-              that.context.stroke();
-              that.context.beginPath();
-              that.context.strokeStyle = "cyan";
-              that.context.lineWidth = 2;
-              that.context.arc(that.leftTouchStartPos.get('x'), that.leftTouchStartPos.get('y'), 60, 0, Math.PI*2, true);
-              that.context.stroke();
-              that.context.beginPath();
-              that.context.strokeStyle = "cyan";
-              that.context.arc(that.leftTouchPos.get('x'), that.leftTouchPos.get('y'), 40, 0,Math.PI*2, true);
-              that.context.stroke();
+            if(touch.identifier == this.model.get('leftTouchID')){
+              this.context.beginPath();
+              this.context.strokeStyle = "cyan";
+              this.context.lineWidth = 6;
+              this.context.arc(this.leftTouchStartPos.get('x'), this.leftTouchStartPos.get('y'), 40, 0, Math.PI*2, true);
+              this.context.stroke();
+              this.context.beginPath();
+              this.context.strokeStyle = "cyan";
+              this.context.lineWidth = 2;
+              this.context.arc(this.leftTouchStartPos.get('x'), this.leftTouchStartPos.get('y'), 60, 0, Math.PI*2, true);
+              this.context.stroke();
+              this.context.beginPath();
+              this.context.strokeStyle = "cyan";
+              this.context.arc(this.leftTouchPos.get('x'), this.leftTouchPos.get('y'), 40, 0,Math.PI*2, true);
+              this.context.stroke();
             } else {
-              that.context.beginPath();
-              that.context.fillStyle = "white";
-              that.context.fillText("touch id : "+touch.identifier+" x:"+touch.clientX+" y:"+touch.clientY, touch.clientX+30, touch.clientY-30);
+              this.context.beginPath();
+              this.context.fillStyle = "white";
+              this.context.fillText("touch id : "+touch.identifier+" x:"+touch.clientX+" y:"+touch.clientY, touch.clientX+30, touch.clientY-30);
 
-              that.context.beginPath();
-              that.context.strokeStyle = "red";
-              that.context.lineWidth = "6";
-              that.context.arc(touch.clientX, touch.clientY, 40, 0, Math.PI*2, true);
-              that.context.stroke();
+              this.context.beginPath();
+              this.context.strokeStyle = "red";
+              this.context.lineWidth = "6";
+              this.context.arc(touch.clientX, touch.clientY, 40, 0, Math.PI*2, true);
+              this.context.stroke();
             }
           }
         } else {
-          self.context.fillStyle  = "white";
-          self.context.fillText("mouse : "+self.model.get('mouseX')+", "+self.model.get('mouseY'), self.model.get('mouseX'), self.model.get('mouseY'));
+          this.context.fillStyle  = "white";
+          this.context.fillText("mouse : "+this.model.get('mouseX')+", "+this.model.get('mouseY'), this.model.get('mouseX'), this.model.get('mouseY'));
         }
-
+      },
+      drawBullets: function(){
+        for (var i = 0; i < this.bullets.length; i++) {
+          var bullet = this.bullets[i];
+          if(!bullet.model.get('enabled')) continue;
+          bullet.update();
+          bullet.draw(this.context);
+          if(!bullet.model.get('enabled'))
+            this.spareBullets.push(bullet);
+        }
       },
       makeBullet: function(){
         var bullet;
@@ -172,7 +171,7 @@ define([
           bullet = new BulletView({
             x: this.ship.pos.get('x'),
             y: this.ship.pos.get('y'),
-            angle: this.ship.get('angle')
+            angle: this.ship.model.get('angle')
           });
 
           this.bullets.push(bullet);
@@ -188,16 +187,18 @@ define([
           var touch = e.changedTouches[i];
 
           if((that.model.get('leftTouchID') < 0) && (touch.clientX < that.model.get('halfWidth'))){
-            console.log(that);
             that.model.set({leftTouchID: touch.identifier});
             that.leftTouchStartPos.reset({x: touch.clientX, y: touch.clientY});
+
             that.leftTouchPos.copyFrom(that.leftTouchStartPos);
             that.leftVector.reset({x: 0, y: 0});
+            
+            window.socket.emit('move', {x: 0, y: 0});
             continue;
           } else {
-            //console.log('that');
-            console.log(that);
             that.makeBullet();
+
+            window.socket.emit('shoot', {});
           }
         }
 
@@ -213,8 +214,11 @@ define([
           var touch =e.changedTouches[i];
           if(that.model.get('leftTouchID') == touch.identifier){
             that.leftTouchPos.reset({x: touch.clientX, y: touch.clientY});
+
             that.leftVector.copyFrom(that.leftTouchPos);
             that.leftVector.minusEq(that.leftTouchStartPos);
+
+            window.socket.emit('move', {x: that.leftVector.get('x'), y: that.leftVector.get('y')});
             break;
           }
         }
@@ -229,13 +233,15 @@ define([
           var touch =e.changedTouches[i];
           if(that.model.get('leftTouchID') == touch.identifier){
             that.model.set({leftTouchID: -1});
+
             that.leftVector.reset({x: 0, y: 0});
+
+            window.socket.emit('move', {x: 0, y: 0});
             break;
           }
         }
       },
       onMouseMove: function(e){
-        //BUG: this.model undefined
         //console.log(this); //<-- this no es la vista del joystick!
         App.router.joystick.model.set({
           mouseX: e.clientX,

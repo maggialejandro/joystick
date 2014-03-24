@@ -11,9 +11,10 @@ define([
       },
       update: function() {
         this.pos.plusEq(this.vel);
-        this.model.set({life: this.model.get('life')--});
+        this.model.set({life: this.model.get('life')-1});
 
-        if(this.get('life') < 0) this.model.set({enabled: false});
+        if(this.model.get('life') < 0) 
+          this.model.set({enabled: false});
 
       },
       reset: function(bulletOptions){
@@ -36,12 +37,12 @@ define([
 
       },
       draw: function(context) {
-        if(!this.get('enabled')) return;
+        if(!this.model.get('enabled')) return;
 
         context.lineWidth =2;
         context.strokeStyle = "#fff";
         context.beginPath();
-        context.arc(this.pos.x,this.pos.y,2, 0, Math.PI*2, true);
+        context.arc(this.pos.get('x'),this.pos.get('y'),2, 0, Math.PI*2, true);
         context.stroke();
 
       }

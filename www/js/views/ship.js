@@ -80,7 +80,7 @@ define(["backbone", "models/ship", "vector2"], function(Backbone, ShipModel, Vec
           this.context.lineTo(-10, 6);
           //c.closePath();
           this.context.stroke();
-          this.model.set({counter: this.model.get('counter')++});
+          this.model.set({counter: this.model.get('counter')+1});
         }
 
         this.context.restore();
