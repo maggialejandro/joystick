@@ -6,8 +6,9 @@ define([
   'text!templates/joystick.html',
   "models/joystick",
   "views/ship",
-  "views/bullet"
-  ], function(Backbone, _, $, Vector2, joystickTemplate, JoystickModel, ShipView, BulletView) {
+  "views/bullet",
+  "views/login"
+  ], function(Backbone, _, $, Vector2, joystickTemplate, JoystickModel, ShipView, BulletView, LoginView) {
 
     var JoystickView = Backbone.View.extend({
       el: $("#app"),
@@ -34,11 +35,16 @@ define([
 
         this.template = _.template(joystickTemplate);
 
-        this.render();
+        this.$el.prepend(this.template());
 
+        var loginView = new LoginView();
+        //loginView.bind("logueado", this.render, this);
+        this.$('#login').html(loginView.render().el);
+        var modal = document.querySelector('#login');
+        modal.classList.toggle('active');
+        this.render();
       },
       render: function(){
-        this.$el.prepend(this.template());
         this.$('.container').html(this.canvas);
 
         this.resetCanvas();
@@ -47,7 +53,7 @@ define([
 
         $('.container').after(this.ship.canvas);
 
-        setInterval(this.draw, 1000/200);
+        setInterval(this.draw, 1000/100);
 
         //TODO: usar eventos de hammer.js
         if('createTouch' in document) {
@@ -192,7 +198,7 @@ define([
 
             that.leftTouchPos.copyFrom(that.leftTouchStartPos);
             that.leftVector.reset({x: 0, y: 0});
-            
+
             window.socket.emit('move', {x: 0, y: 0});
             continue;
           } else {
