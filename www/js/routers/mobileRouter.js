@@ -3,7 +3,7 @@ define(["jquery", "backbone", "socketio", "views/joystick"],
 
         var AppRouter = Backbone.Router.extend( {
             initialize: function() {
-                window.socket = io.connect('http://192.168.0.2:3000');
+                window.socket = io.connect('http://192.168.1.233:9000');
                 //window.socket.emit('jugadorConectado', {});
                 //new AppView();
                 this.joystick = new JoystickView();
