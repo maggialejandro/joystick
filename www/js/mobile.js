@@ -3,10 +3,11 @@ require.config({
   shim : {
     "underscore": {
       "exports": '_'
-    },
+    },/*
     "ratchet": {
-        "exports": 'ratchet'
-    },
+        "exports": 'ratchet',
+        "deps" : ["jquery"]
+    },*/
     "backbone" : {
       "deps" : ["underscore", "jquery"],
       "exports" : "Backbone" //attaches "Backbone" to the window object
@@ -28,15 +29,14 @@ require.config({
     //"bootstrap" : "libs/bootstrap",
     "socketio" : "libs/socket.io",
     "ratchet" : "libs/ratchet",
-    "hammer" : "libs/hammer",
+    //"hammer" : "libs/hammer",
     "vector2" : "libs/vector2"
   }
 });
 
 
 require(["jquery", "routers/mobileRouter", "underscore", "ratchet"],
-  function($, MobileRouter, _, io, ratchet){
-    console.log(ratchet);
+  function($, MobileRouter, _, io){
     if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) {
           //document.addEventListener('deviceready', function() { //TODO: es necesario para phonegap?
               App.router = new MobileRouter();

@@ -7,8 +7,8 @@ define([
   "models/joystick",
   "views/ship",
   "views/bullet",
-  "views/login"
-  ], function(Backbone, _, $, Vector2, joystickTemplate, JoystickModel, ShipView, BulletView, LoginView) {
+  "views/register"
+  ], function(Backbone, _, $, Vector2, joystickTemplate, JoystickModel, ShipView, BulletView, RegisterView) {
 
     var JoystickView = Backbone.View.extend({
       el: $("#app"),
@@ -37,11 +37,11 @@ define([
 
         this.$el.prepend(this.template());
 
-        var loginView = new LoginView();
-        //loginView.bind("logueado", this.render, this);
-        this.$('#login').html(loginView.render().el);
-        var modal = document.querySelector('#login');
-        modal.classList.toggle('active');
+        //var registerView = new RegisterView();
+        //registerView.bind("logueado", this.render, this);
+        //this.$('#login').html(registerView.render().el);
+        //var modal = document.querySelector('#login');
+        //modal.classList.toggle('active');
         this.render();
       },
       render: function(){
@@ -49,9 +49,9 @@ define([
 
         this.resetCanvas();
 
-        this.ship = new ShipView({x: this.model.get('halfWidth'), y: this.model.get('halfHeight')});
+        //this.ship = new ShipView({x: this.model.get('halfWidth'), y: this.model.get('halfHeight')});
 
-        $('.container').after(this.ship.canvas);
+        //$('.container').after(this.ship.canvas);
 
         setInterval(this.draw, 1000/100);
 
@@ -90,6 +90,7 @@ define([
         var that = App.router.joystick;
         that.context.clearRect(0, 0, that.canvas.width, that.canvas.height);
 
+        /*
         that.ship.targetVel.copyFrom(that.leftVector);
         that.ship.targetVel.multiplyEq(0.2);
 
@@ -108,7 +109,7 @@ define([
         that.ship.draw();
 
         that.drawBullets();
-
+        */
         that.drawJoysticks();
 
       },
@@ -202,8 +203,7 @@ define([
             window.socket.emit('move', {x: 0, y: 0});
             continue;
           } else {
-            that.makeBullet();
-
+            //that.makeBullet();
             window.socket.emit('shoot', {});
           }
         }

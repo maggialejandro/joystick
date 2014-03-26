@@ -2,16 +2,16 @@ define([
   "backbone",
   "jquery",
   "underscore",
-  "text!templates/login.html",
+  "text!templates/register.html",
   "models/user"
-  ], function(Backbone, $, _, loginTemplate, UserModel) {
+  ], function(Backbone, $, _, registerTemplate, UserModel) {
 
     var LoginView = Backbone.View.extend({
       events: {
-        'touchend button.loguear' : 'loguear'
+        'click button.register' : 'register'
       },
       initialize: function(){
-        this.template = _.template(loginTemplate);
+        this.template = _.template(registerTemplate);
         this.user = new UserModel();
 
         this.user.bind('destroy', this.remove, this);
@@ -28,7 +28,7 @@ define([
 
         return this;
       },
-      loguear: function(){
+      register: function(){
         var that = this;
         var $login = $('#login form');
 
