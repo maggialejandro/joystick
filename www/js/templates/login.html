@@ -4,9 +4,32 @@
 
 <div class="content">
   <form class="input-group">
-    <input type="text" placeholder="Full name">
-    <input type="email" placeholder="Email">
-    <input type="text" placeholder="Username">
+    <input
+    name="name"
+    type="text"
+    value="<%= user.name %>"
+    placeholder="Nombre"
+    >
+    <input
+    name="email"
+    type="email"
+    value="<%= user.email %>"
+    placeholder="Email"
+    >
+    <input
+    name="password"
+    type="password"
+    value="<%= user.password %>"
+    placeholder="Password"
+    >
+
+    <ul class="table-view">
+      <% _.each(errores, function(error){ %>
+        <li class="table-view-cell">
+          <p style="color: red"><%= error.message %></p>
+        </li>
+      <% }); %>
+    </ul>
   </form>
   <button class="btn btn-primary btn-block btn-outlined loguear">Loguear</button>
 </div>
