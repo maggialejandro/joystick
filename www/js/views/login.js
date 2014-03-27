@@ -1,17 +1,17 @@
 define([
-  "backbone",
   "jquery",
+  "backbone",
   "underscore",
-  "text!templates/register.html",
+  "text!templates/login.html",
   "models/user"
-  ], function(Backbone, $, _, registerTemplate, UserModel) {
+  ], function($, Backbone, _, loginTemplate, UserModel) {
 
-    var RegisterView = Backbone.View.extend({
+    var LoginView = Backbone.View.extend({
       events: {
-        'click button.register' : 'register'
+        'click button.login' : 'login'
       },
       initialize: function(){
-        this.template = _.template(registerTemplate);
+        this.template = _.template(loginTemplate);
         this.user = new UserModel();
 
         this.user.bind('destroy', this.remove, this);
@@ -22,26 +22,23 @@ define([
         this.$el.html(this.template({
           errores: this.errores,
           user: this.user.toJSON()
-        }));
-
-        //this.delegateEvents();
+        }))
 
         return this;
       },
-      register: function(){
+      login: function(){
         var that = this;
-        var $registerForm = this.$('form');
+        var $loginForm = this.$('form');
 
         this.user.set({
-          email: $registerForm.find('input[name="email"]').val(),
-          name: $registerForm.find('input[name="name"]').val(),
-          password: $registerForm.find('input[name="password"]').val()
+          email: $loginForm.find('input[name="email"]').val(),
+          password: $loginForm.find('input[name="password"]').val()
         });
 
         //TODO: usar user model
         //modificar backbone.sync
         $.ajax({
-          url: 'http://192.168.1.233:9000/create',
+          url: 'http://192.168.1.233:9000/login',
           type: 'GET',
           data: this.user.toJSON(),
           dataType: 'jsonp',
@@ -71,5 +68,5 @@ define([
 
     });
 
-    return RegisterView;
+    return LoginView;
 });

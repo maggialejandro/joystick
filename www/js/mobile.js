@@ -28,15 +28,15 @@ require.config({
     "text": "libs/text",
     //"bootstrap" : "libs/bootstrap",
     "socketio" : "libs/socket.io",
-    "ratchet" : "libs/ratchet",
+    //"ratchet" : "libs/ratchet",
     //"hammer" : "libs/hammer",
     "vector2" : "libs/vector2"
   }
 });
 
 
-require(["jquery", "routers/mobileRouter", "underscore", "ratchet"],
-  function($, MobileRouter, _, io){
+require(["jquery", "backbone", "routers/mobileRouter", "underscore"],
+  function($, Backbone, MobileRouter, _, io){
     if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) {
           //document.addEventListener('deviceready', function() { //TODO: es necesario para phonegap?
               App.router = new MobileRouter();
@@ -44,5 +44,7 @@ require(["jquery", "routers/mobileRouter", "underscore", "ratchet"],
       } else {
           App.router = new MobileRouter();
       }
+
+    Backbone.history.start();
   });
 

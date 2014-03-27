@@ -6,14 +6,12 @@ define([
   'text!templates/joystick.html',
   "models/joystick",
   "views/ship",
-  "views/bullet",
-  "views/register"
-  ], function(Backbone, _, $, Vector2, joystickTemplate, JoystickModel, ShipView, BulletView, RegisterView) {
+  "views/bullet"
+  ], function(Backbone, _, $, Vector2, joystickTemplate, JoystickModel, ShipView, BulletView) {
 
     var JoystickView = Backbone.View.extend({
       el: $("#app"),
       initialize: function(){
-
         //Global
         App.models.Vector2Const.temp = new Vector2({
           x: 0,
@@ -35,13 +33,8 @@ define([
 
         this.template = _.template(joystickTemplate);
 
-        this.$el.prepend(this.template());
+        this.$el.html(this.template());
 
-        //var registerView = new RegisterView();
-        //registerView.bind("logueado", this.render, this);
-        //this.$('#login').html(registerView.render().el);
-        //var modal = document.querySelector('#login');
-        //modal.classList.toggle('active');
         this.render();
       },
       render: function(){
@@ -53,7 +46,7 @@ define([
 
         //$('.container').after(this.ship.canvas);
 
-        setInterval(this.draw, 1000/100);
+        setInterval(this.draw, 1000/60);
 
         //TODO: usar eventos de hammer.js
         if('createTouch' in document) {
