@@ -7,7 +7,8 @@ define([
 		var HomeView = Backbone.View.extend({
       events: {
         'click .register' : 'register',
-        'click .login' : 'login'
+        'click .login' : 'login',
+        'click .play' : 'play'
       },
 			initialize: function(){
 				this.template = _.template(homeTemplate);
@@ -22,6 +23,9 @@ define([
       },
       login: function(){
         App.router.navigate("login", {trigger: true});
+      },
+      play: function(){
+        App.router.navigate("game", {trigger: true});
       }
 
 		});
