@@ -36,7 +36,7 @@ require.config({
 
 
 require(["jquery", "backbone", "routers/mobileRouter", "underscore"],
-  function($, Backbone, MobileRouter, _, io){
+  function($, Backbone, MobileRouter, _){
     if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) {
           //document.addEventListener('deviceready', function() { //TODO: es necesario para phonegap?
               App.router = new MobileRouter();
