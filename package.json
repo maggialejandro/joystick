@@ -2,6 +2,7 @@
   "name": "joystick",
   "version": "0.0.0",
   "description": "HTML5 Controller",
+  "homepage": "https://github.com/maggialejandro/joystick",
   "repository": {
     "type": "git",
     "url": "https://github.com/maggialejandro/joystick.git"
@@ -10,7 +11,10 @@
   "bugs": {
     "url": "https://github.com/maggialejandro/joystick/issues"
   },
-  "homepage": "https://github.com/maggialejandro/joystick",
+  "dependencies": {
+    "express": "~4.0.0",
+    "lodash": "~2.4.1"
+  },
   "devDependencies": {
     "grunt": "^0.4.4",
     "time-grunt": "~0.2.10",

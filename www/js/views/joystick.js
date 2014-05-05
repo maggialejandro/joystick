@@ -129,10 +129,6 @@ define([
               this.context.stroke();
             } else {
               this.context.beginPath();
-              this.context.fillStyle = "white";
-              this.context.fillText("touch id : "+touch.identifier+" x:"+touch.clientX+" y:"+touch.clientY, touch.clientX+30, touch.clientY-30);
-
-              this.context.beginPath();
               this.context.strokeStyle = "red";
               this.context.lineWidth = "6";
               this.context.arc(touch.clientX, touch.clientY, 40, 0, Math.PI*2, true);
