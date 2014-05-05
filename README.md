@@ -1,9 +1,14 @@
-# Hello Phonegap!
+# Multi Touch HTML5 Controller over Web Sockets !
 
-In the `www` folder, compile the app's JavaScript using the RequireJS optimizer:
+Prerequisites:
+- Open the [server](http://server-alejandrojs.rhcloud.com/) first.
 
-	$  node r.js -o build.js
+try the [demo](http://joystick-alejandrojs.rhcloud.com/) on a touch device!
 
-Build the native app and test on a device:
+Technologies:
+- [Backbone](http://backbonejs.org/)
+- [RequireJS](http://requirejs.org/)
+- [PhoneGap](http://phonegap.com/)
+- [SocketIO](http://socket.io/)
 
-	$ phonegap run ios
+This project is inspired by [sebleedelisle](https://github.com/sebleedelisle) [demo](https://github.com/sebleedelisle/JSTouchController).
